@@ -8,14 +8,14 @@ const { version } = require('./package.json');
 
 const config = {
   mode: process.env.NODE_ENV,
-  context: __dirname + '/src',
+  context: `${__dirname}/src`,
   entry: {
     'background': './background.js',
     'popup/popup': './popup/popup.js',
     'content/content': './content/content.js',
   },
   output: {
-    path: __dirname + '/dist',
+    path: `${__dirname}/dist`,
     filename: '[name].js',
   },
   resolve: {
@@ -62,12 +62,13 @@ const config = {
       filename: '[name].css',
     }),
     new CopyWebpackPlugin([
+      { from: 'static', to: 'static' },
       { from: 'icons', to: 'icons', ignore: ['icon.xcf'] },
       { from: 'popup/popup.html', to: 'popup/popup.html', transform: transformHtml },
       {
         from: 'manifest.json',
         to: 'manifest.json',
-        transform: (content) => {
+        transform: content => {
           const jsonContent = JSON.parse(content);
           jsonContent.version = version;
 
@@ -98,7 +99,7 @@ if (process.env.HMR === 'true') {
       reloadPage: true,
       entries: {
         background: 'background',
-        contentScript: 'content/content'
+        contentScript: 'content/content',
       },
     }),
   ]);

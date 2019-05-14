@@ -13,6 +13,9 @@
   },
   "background": {
     "scripts": [
+      "static/decoder.js",
+      "static/CRequest.js",
+      "static/url_slug.js",
       "background.js"
     ]
   },

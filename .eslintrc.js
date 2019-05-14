@@ -27,6 +27,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    "linebreak-style": 0,
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',
@@ -34,7 +35,7 @@ module.exports = {
     }],
       // disallow reassignment of function parameters
       // disallow parameter object manipulation except for specific exclusions
-      'no-param-reassign': ['error', {
+    'no-param-reassign': ['error', {
       props: true,
       ignorePropertyModificationsFor: [
         'state', // for vuex state

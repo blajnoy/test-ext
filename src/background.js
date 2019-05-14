@@ -1,8 +1,8 @@
 /*
 import store from './store';
-
-*/
 global.browser = require('webextension-polyfill');
+*/
+import chrome from 'webextension-polyfill';
 
 chrome.runtime.onMessage.removeListener(handleMessage);
 chrome.runtime.onMessage.addListener(handleMessage);
@@ -173,6 +173,7 @@ async function handleMessage(request, sender, sendResponse) {
       });
       break;
     case 'sendRequest':
+      console.log('qwertyuiop');
       const res = await make(request.link, request.body);
       if (res.statusCode === 200) {
         await parseMp3(res.body, request.name, request.duration, request.body, request.vkId);
@@ -184,6 +185,11 @@ async function handleMessage(request, sender, sendResponse) {
   }
   return true;
 }
+
+chrome.downloads.setShelfEnabled(false);
+
+console.log(chrome);
+console.log(chrome.downloads);
 
 chrome.downloads.onChanged.addListener(delta => {
   if (delta.state && delta.state.current === 'complete') {

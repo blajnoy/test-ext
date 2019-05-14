@@ -7,10 +7,7 @@ import Vue from 'vue';
 import DownloadButton from './components/DownloadButton';
 import DownloadAllButton from './components/DownloadAllButton';
 import Modal from './components/Modal';
-import {
-  setCookie as setCookieAPI,
-  decodeHtml as decodeHtmlAPI,
-} from '../ext/helper';
+import { setCookie as setCookieAPI, decodeHtml as decodeHtmlAPI } from '../ext/helper';
 
 export default {
   name: 'App',
@@ -175,14 +172,14 @@ export default {
 
       setCookieAPI('remixcurr_audio', vkId);
 
-      /*chrome.runtime.sendMessage({
+      chrome.runtime.sendMessage({
         type: 'sendRequest',
         link: `${this.access}vk.com/al_audio.php`,
         name: mp3Name,
         body,
         vkId: audiosToDownload.vkId,
         duration,
-      });*/
+      });
     },
   },
 };
