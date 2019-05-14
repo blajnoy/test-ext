@@ -1,10 +1,27 @@
 <template>
-  <div class="downloadButton audio_act"><a href="#" class="fngfng"></a></div>
+  <div class="downloadButton audio_act"><a @click.stop.prevent="onClick()" href="#" class="fngfng"></a></div>
 </template>
 
 <script>
 export default {
   name: 'DownloadButton',
+  props: {
+    audiosToDownload: {
+      artist: '',
+      title: '',
+      url: null,
+      album: '',
+      fullId: '',
+      track_addon: '',
+      vkId: null,
+      length: 0,
+    },
+  },
+  methods: {
+    onClick() {
+      this.$emit('download', this.audiosToDownload);
+    },
+  },
 };
 </script>
 
