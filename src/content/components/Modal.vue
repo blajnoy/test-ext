@@ -3,7 +3,7 @@
     <div class="lapper">
       <div id="wrap-layout"></div>
       <div class="modal">
-        <button class="close" id="close-modal">X</button>
+        <button @click="close()" class="close" id="close-modal">X</button>
         <slot :name="type" />
       </div>
     </div>
@@ -15,6 +15,11 @@ export default {
   name: 'Modal',
   props: {
     type: String,
+  },
+  methods: {
+    close() {
+      this.$emit('close-modal');
+    },
   },
 };
 </script>
