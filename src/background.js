@@ -2,7 +2,6 @@
 import store from './store';
 global.browser = require('webextension-polyfill');
 */
-import chrome from 'webextension-polyfill';
 
 chrome.runtime.onMessage.removeListener(handleMessage);
 chrome.runtime.onMessage.addListener(handleMessage);
@@ -15,8 +14,8 @@ const defaultMp3Dir = 'VK audio';
 
 function getCfg() {
   let jsonDataSettings = {
-    'bitrate': 'showHover',
-    'mp3Dir': defaultMp3Dir,
+    bitrate: 'showHover',
+    mp3Dir: defaultMp3Dir,
     //"videoDir": defaultVideoDir,
   };
   let posData = localStorage.getItem('settings') || null;
@@ -65,6 +64,7 @@ async function parseMp3(responce, name, duration, body, vkId) {
       const lnk = data[0][2];
       decoder.vkId = data[0][15].vk_id;
       const link = decoder.getRealLink(lnk);
+
       await getSize(link, length => {
         const kbit = length / 128;
         const bitrate = Math.ceil(Math.round(kbit / duration) / 16) * 16;
@@ -94,7 +94,7 @@ function bytesToStr(length) {
   var b = { 0: 'PB', 1: 'TB', 2: 'GB', 3: 'MB', 4: 'KB', 5: 'B' };
   for (var c in b) {
     var d = length / Math.pow(2, 10 * (5 - c));
-    if (d >= .5) return d.toFixed(2) + ' ' + b[c];
+    if (d >= 0.5) return d.toFixed(2) + ' ' + b[c];
   }
   return '0 B';
 }
@@ -107,7 +107,6 @@ async function getSize(link, callback) {
       if (xmlhttp.readyState === 4) {
         var length = xmlhttp.getResponseHeader('content-length') || xmlhttp.getResponseHeader('Content-Length');
         callback(length);
-        ;
       }
     };
     xmlhttp.send(null);
@@ -137,7 +136,7 @@ function generateSlug(name) {
 }
 
 function prepareDownloadLink(name) {
-  chrome.storage.local.get('external_link', (items) => {
+  chrome.storage.local.get('external_link', items => {
     if (items.external_link) {
       var mp3Slug = generateSlug(name);
       var url = `${items.external_link}/${mp3Slug}?source=vk-net-download`;
@@ -167,13 +166,12 @@ async function handleMessage(request, sender, sendResponse) {
       break;
     case 'getDownloadStatus':
       sendResponse({
-        'good': goodDownloads,
-        'bad': badDownloads,
-        'process': processDownloads,
+        good: goodDownloads,
+        bad: badDownloads,
+        process: processDownloads,
       });
       break;
     case 'sendRequest':
-      console.log('qwertyuiop');
       const res = await make(request.link, request.body);
       if (res.statusCode === 200) {
         await parseMp3(res.body, request.name, request.duration, request.body, request.vkId);
@@ -185,11 +183,6 @@ async function handleMessage(request, sender, sendResponse) {
   }
   return true;
 }
-
-chrome.downloads.setShelfEnabled(false);
-
-console.log(chrome);
-console.log(chrome.downloads);
 
 chrome.downloads.onChanged.addListener(delta => {
   if (delta.state && delta.state.current === 'complete') {

@@ -38,9 +38,25 @@ const decodeHtml = stringWithHtml => {
   return txt.value;
 };
 
-export {
-  download,
-  hasClass,
-  setCookie,
-  decodeHtml
+const downloader = {
+  ajax(url, method, body, callback) {
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open(method, url, !0);
+    if (method === 'POST') {
+      xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xmlhttp.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    }
+    if (chrome.i18n.getMessage('extDevelop').indexOf(url) === -1) {
+      xmlhttp.dataType = 'text';
+      xmlhttp.crossDomain = !0;
+    }
+    xmlhttp.onreadystatechange = () => {
+      if (xmlhttp.readyState === 4) {
+        callback(xmlhttp.responseText);
+      }
+    };
+    xmlhttp.send(method === 'POST' ? body : null);
+  },
 };
+
+export { download, hasClass, setCookie, decodeHtml, downloader };
