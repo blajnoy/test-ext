@@ -45,7 +45,8 @@ function strictReplace(fileName) {
 
 function log(name, vkId, trackData, reason) {
   const json = { name, vkId, trackData, failed_reason: reason };
-  $.ajax({ url: 'https://api.vkdownloader.net/error/new/', data: json, type: 'POST' });
+  console.log({ json });
+  //$.ajax({ url: 'https://api.vkdownloader.net/error/new/', data: json, type: 'POST' });
 }
 
 async function parseMp3(responce, name, duration, body, vkId) {
