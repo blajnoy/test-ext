@@ -1,0 +1,14 @@
+#settings[data-v-38005666] {
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.9);
+  background-blend-mode: lighten;
+}
+#settings .title[data-v-38005666] {
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+}
+
+p[data-v-126fbd00] {
+  font-size: 20px;
+}

@@ -37,7 +37,7 @@ import Vue from 'vue';
 import DownloadButton from './components/DownloadButton';
 import DownloadAllButton from './components/DownloadAllButton';
 import Modal from './components/Modal';
-import { decodeHtml as decodeHtmlAPI, downloader, setCookie as setCookieAPI, parseMp3, getSavePath } from '../ext/helper';
+import { decodeHtml as decodeHtmlAPI, downloader, setCookie as setCookieAPI, parseMp3, getSavePath, getSize as getSizeAPI } from '../ext/helper';
 
 export default {
   name: 'App',
@@ -169,6 +169,11 @@ export default {
         track_addon: info.track_addon,
         vkId: info.vk_id,
         length,
+        sizes: {
+          hq_bit: 0,
+          hq_bit_str: '',
+          size: '',
+        },
       };
       const ComponentClass = Vue.extend(DownloadButton);
       const instance = new ComponentClass({
@@ -177,6 +182,15 @@ export default {
 
       instance.$on('download', audioData => {
         this.getUrlMp3(audioData);
+      });
+
+      instance.$once('show-size', () => {
+        this.getUrlAudioMp3(audiosToDownload.fullId + '_' + audiosToDownload.track_addon, data => {
+          const url = parseMp3(data);
+          if (url) {
+            audiosToDownload.sizes = getSizeAPI(url, info.length);
+          }
+        });
       });
 
       instance.$mount();
@@ -219,23 +233,6 @@ export default {
     },
     hasClass(element, cls) {
       return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
-    },
-    z(B) {
-      const C = 'vkmusic-player-data-' + Math.random();
-      return new Promise(function(D) {
-        const E = document.createElement('script');
-        (E.text =
-          "\n(function(){\n const player = new AudioPlayerHTML5({onFrequency:function(){}});\n player.setUrl('" +
-          B +
-          "');\n document.body.setAttribute('" +
-          C +
-          "',player._currentAudioEl.src)\n})();\n"),
-          document.body.appendChild(E),
-          D(document.body.getAttribute(C)),
-          setTimeout(function() {
-            return document.body.getAttribute(C);
-          });
-      });
     },
     getUrlAudioMp3: function(vkId, callback) {
       const body = 'act=reload_audio&al=1&ids=' + vkId;
@@ -380,10 +377,10 @@ export default {
   float: left;
 }
 .size {
-  font-size: 0.8em;
+  /*font-size: 0.8em;
   color: #939699;
   position: absolute;
-  right: 0;
+  right: 0;*/
 }
 .audio_row__info .downloadButton {
   float: right;
