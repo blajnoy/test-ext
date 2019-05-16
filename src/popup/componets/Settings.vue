@@ -1,32 +1,55 @@
 <template>
   <div id="settings">
     <div class="title">Settings</div>
-    <input type="radio" value="showNone" class="showBitrate" name="showBitrate" id="sb1" />
-    <label for="sb1" id="lsb1">Do not show bitrate and size </label><br/>
+    <input v-model="showSize" type="radio" value="showNone" class="showBitrate" name="showBitrate" id="sb1" />
+    <label for="sb1" id="lsb1">Do not show bitrate and size </label><br />
 
-    <input type="radio" value="showHover" class="showBitrate" name="showBitrate" id="sb2" />
-    <label for="sb2" id="lsb2">Show bitrate and size when hovering to audio </label><br/>
+    <input v-model="showSize" type="radio" value="showHover" class="showBitrate" name="showBitrate" id="sb2" />
+    <label for="sb2" id="lsb2">Show bitrate and size when hovering to audio </label><br />
 
-    <span id="chromeDownloadFolder">All paths to folders are relative folders for downloads. Leave the field blank,
-    if you do not want the files to be downloaded to subfolders</span>
-    <br/>
-    <br/>
-    <p><label id="laudioFolder" for="audioDownloadFolder">Folder for music downloads</label><br/>
-      <input id="audioDownloadFolder" />
+    <span id="chromeDownloadFolder"
+      >All paths to folders are relative folders for downloads. Leave the field blank, if you do not want the files to be downloaded to subfolders</span
+    >
+    <br />
+    <br />
+    <p>
+      <label id="laudioFolder" for="audioDownloadFolder">Folder for music downloads</label><br />
+      <input id="audioDownloadFolder" v-model="downloadFolder" />
     </p>
-
-    <!--<p><label id="lvideoFolder" for="videoDownloadFolder">Папка для скачивания видео</label><br />
-        <input id="videoDownloadFolder"/></p>-->
-
     <div id="status"></div>
     <button id="save">Save</button>
-    <hr>
+    {{ showSize }}
+    {{ downloadFolder }}
+    <hr />
   </div>
 </template>
 
 <script>
+import { mapGetters, mapActions, mapState } from 'vuex';
+
 export default {
   name: 'Settings',
+  props: {},
+  data() {
+    return {
+      showSize: 'showSize',
+      downloadFolder: 'downloadFolder',
+    };
+  },
+  methods: {},
+  computed: {
+    //...mapGetters(['downloadsCount', 'downloadsRender', 'downloadsProgressCount', 'videosOnPage']),
+    ...mapState({
+      bitrate: state => state.bitrate,
+      mp3Dir: state => state.mp3Dir,
+    }),
+  },
+  updated() {
+    this.showSize = this.bitrate;
+    this.downloadFolder = this.mp3Dir;
+
+    console.log(this.bitrate, this.mp3Dir);
+  },
 };
 </script>
 

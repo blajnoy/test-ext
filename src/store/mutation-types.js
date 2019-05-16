@@ -1,1 +1,2 @@
-export const UPDATE_FOO = 'UPDATE_FOO';
+export const UPDATE_BITRATE = 'UPDATE_BITRATE';
+export const UPDATE_MP3DIR = 'UPDATE_MP3DIR';

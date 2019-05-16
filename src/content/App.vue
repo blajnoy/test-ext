@@ -58,7 +58,7 @@ export default {
       modalType: 'availableMass',
       request: {},
       items: [],
-      downloadUrls: [],
+      bitrateShowHover: true,
     };
   },
   computed: {
@@ -68,25 +68,34 @@ export default {
     },
   },
   mounted() {
-    chrome.extension.onMessage.addListener(request => {
-      console.log(request);
+    if (this.isTrueHostname) {
+      chrome.extension.onMessage.addListener(request => {
+        this.request = request;
+        if (request.type === 'failed') {
+          this.modalType = 'notAvailable';
+          this.showModal = true;
+        } else {
+          this.download();
+        }
+      });
 
-      this.request = request;
+      chrome.runtime.sendMessage(
+        chrome.runtime.id,
+        {
+          type: 'getCfg',
+        },
+        function(data) {
+          this.bitrateShowHover = data.bitrate === 'showHover';
+        }
+      );
 
-      if (request.type === 'failed') {
-        this.modalType = 'notAvailable';
-      } else {
-        this.modalType = 'available';
-      }
-
-      this.showModal = true;
-    });
-
-    this.observer = null;
-    this.addDownloadAllBtn();
-    this.processingNodes(document.querySelectorAll('.audio_row'));
-    this.observer = new MutationObserver(this.parseMutation);
-    this.observer.observe(this.$options.target, this.$options.config);
+      this.observer = null;
+      //TODO:  download all audio
+      //this.addDownloadAllBtn();
+      this.processingNodes(document.querySelectorAll('.audio_row'));
+      this.observer = new MutationObserver(this.parseMutation);
+      this.observer.observe(this.$options.target, this.$options.config);
+    }
   },
   methods: {
     closeModal() {
@@ -262,7 +271,7 @@ export default {
       chrome.runtime.sendMessage({
         type: 'sendRequest',
         link: `${this.access}vk.com/al_audio.php`,
-        name: mp3Name,
+        name: getSavePath(audiosToDownload),
         body,
         vkId: audiosToDownload.vkId,
         duration,
@@ -324,7 +333,6 @@ export default {
       const item = this.items[0];
       const url = this.getUrlAudioMp3(item.fullId + '_' + item.track_addon, data => {
         const url = parseMp3(data);
-        debugger;
         if (url) {
           url.then(link => {
             item.url = link;

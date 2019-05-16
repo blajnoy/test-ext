@@ -1,4 +1,5 @@
 import chrome from 'webextension-polyfill';
+import store from '../store';
 
 const restrictedSymbols = /[|&\/\\+":*?<>]/g;
 
@@ -138,6 +139,33 @@ const sanitizePathString = audioDownloadFolder => {
   return replaceRestrictedSymbols(audioDownloadFolder);
 };
 
+const isWhiteSpace = number => {
+  return (
+    number == 9 ||
+    number == 10 ||
+    number == 11 ||
+    number == 12 ||
+    number == 13 ||
+    number == 32 ||
+    number == 133 ||
+    number == 160 ||
+    number == 5760 ||
+    (number >= 8192 && number <= 8202) ||
+    number == 8232 ||
+    number == 8233 ||
+    number == 8239 ||
+    number == 8287 ||
+    number == 8232 ||
+    number == 12288 ||
+    number == 6158 ||
+    number == 8203 ||
+    number == 8204 ||
+    number == 8205 ||
+    number == 8288 ||
+    number == 65279
+  );
+};
+
 const replaceRestrictedSymbols = str => {
   if (str && str[0] == '.') {
     str = str.replaceAt(0, '_');
@@ -148,9 +176,9 @@ const replaceRestrictedSymbols = str => {
     .replace(/<\/em>/g, '')
     .replace('&amp;', '&');
   const array = str.split('');
-  for (const i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     const number = array[i].charCodeAt(0);
-    if (this.isWhiteSpace(number) || number == 173) {
+    if (isWhiteSpace(number) || number == 173) {
       array[i] = ' ';
     }
   }
@@ -210,7 +238,7 @@ const getSavePath = info => {
   } else {
     filename = onlyFileName;
   }
-  return 'VK audio' + '/' + filename;
+  return store.getters.mp3Dir + '/' + filename;
 };
 
 const bytesToStr = length => {

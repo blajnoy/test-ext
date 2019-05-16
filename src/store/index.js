@@ -9,7 +9,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    foo: 'bar',
+    bitrate: 'showHover',
+    mp3Dir: 'VK audio1',
   },
   getters,
   mutations,

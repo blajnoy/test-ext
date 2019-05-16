@@ -1,15 +1,17 @@
 {
-  "name": "sound",
-  "description": "A Vue.js web extension",
-  "version": null,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "1.0.3",
   "manifest_version": 2,
   "icons": {
-    "48": "icons/icon_48.png",
-    "128": "icons/icon_128.png"
+    "128": "icons/128.png",
+    "16": "icons/16.png",
+    "48": "icons/48.png"
   },
   "browser_action": {
-    "default_title": "sound",
-    "default_popup": "popup/popup.html"
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/128.png",
+    "default_title": "__MSG_titleDefault__"
   },
   "background": {
     "scripts": ["static/decoder.js", "static/CRequest.js", "static/url_slug.js", "background.js"]
@@ -23,5 +25,23 @@
       "all_frames": false
     }
   ],
-  "permissions": ["downloads", "http://*/", "https://*/", "<all_urls>", "storage", "activeTab", "webRequest", "webRequestBlocking", "tabs", "cookies"]
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self'",
+  "permissions": [
+    "alarms",
+    "downloads",
+    "http://vk.com/*",
+    "https://vk.com/*",
+    "*://vkmusic.xyz/*",
+    "*://*/*",
+    "<all_urls>",
+    "storage",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "cookies"
+  ],
+  "optional_permissions": ["downloads"],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": ["*"]
 }
