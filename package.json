@@ -1,6 +1,6 @@
 {
   "name": "sound",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A Vue.js web extension",
   "author": "alexey.nik <blajnoy@gmail.com>",
   "scripts": {
