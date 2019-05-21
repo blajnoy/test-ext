@@ -10,7 +10,7 @@ const config = {
   mode: process.env.NODE_ENV,
   context: `${__dirname}/src`,
   entry: {
-    'background': './background.js',
+    background: './background.js',
     'popup/popup': './popup/popup.js',
     'content/content': './content/content.js',
   },
@@ -63,6 +63,7 @@ const config = {
     }),
     new CopyWebpackPlugin([
       { from: 'static', to: 'static' },
+      { from: '_locales', to: '_locales' },
       { from: 'icons', to: 'icons', ignore: ['icon.xcf'] },
       { from: 'popup/popup.html', to: 'popup/popup.html', transform: transformHtml },
       {

@@ -37,7 +37,9 @@ import Vue from 'vue';
 import DownloadButton from './components/DownloadButton';
 import DownloadAllButton from './components/DownloadAllButton';
 import Modal from './components/Modal';
+import Sizes from './components/Sizes';
 import { decodeHtml as decodeHtmlAPI, downloader, setCookie as setCookieAPI, parseMp3, getSavePath, getSize as getSizeAPI } from '../ext/helper';
+import { mapState } from 'vuex';
 
 export default {
   name: 'App',
@@ -48,6 +50,7 @@ export default {
   },
   components: {
     Modal,
+    Sizes,
   },
   data() {
     return {
@@ -66,6 +69,10 @@ export default {
       const { hostname } = document.location;
       return hostname.indexOf('vk.com') >= 0;
     },
+    ...mapState({
+      bitrate: state => state.bitrate,
+      mp3Dir: state => state.mp3Dir,
+    }),
   },
   mounted() {
     if (this.isTrueHostname) {
@@ -188,6 +195,13 @@ export default {
       const instance = new ComponentClass({
         propsData: { audiosToDownload },
       });
+      let sizes = {
+        hq_bit: 0,
+        hq_bit_str: '',
+        size: '',
+      };
+      const sizesClass = Vue.extend(Sizes);
+      let sizesInstance;
 
       instance.$on('download', audioData => {
         this.getUrlMp3(audioData);
@@ -198,9 +212,20 @@ export default {
           const url = parseMp3(data);
           if (url) {
             audiosToDownload.sizes = getSizeAPI(url, info.length);
+
+            sizesInstance = new sizesClass({
+              propsData: {
+                sizes: audiosToDownload.sizes,
+                showSizes: true,
+              },
+            });
+            sizesInstance.$mount();
+            instance.$el.insertBefore(sizesInstance.$el, instance.$el.firstChild);
           }
         });
       });
+
+      instance.$once('leave', () => {});
 
       instance.$mount();
       audioActs.insertBefore(instance.$el, audioActs.firstChild);

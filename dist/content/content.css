@@ -27,7 +27,7 @@
   white-space: nowrap;
   transition: all 0.15s ease-in-out;
 }
-.downloadButton:hover .size[data-v-f3d11442] {
+.downloadButton:not(.shown):hover .size[data-v-f3d11442] {
   opacity: 1;
 }
 
@@ -98,6 +98,54 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
   background-blend-mode: lighten;
+}
+
+.vkd_bitrate[data-v-4851711d] {
+  position: absolute;
+  white-space: nowrap;
+  bottom: -10px;
+  right: -25px;
+}
+.bitrated_audio[data-v-4851711d] {
+  color: white;
+  display: inline-block;
+  width: 18px;
+  height: 11px;
+  border-radius: 2px;
+  text-align: center;
+  text-shadow: 0 0 8px black;
+  font-size: 8px;
+  line-height: 11px;
+  vertical-align: middle;
+  margin: 0 4px 0 0;
+}
+.vk_size[data-v-4851711d] {
+  font-size: 0.8em;
+  color: #939699;
+  display: inline-block;
+  vertical-align: middle;
+  min-width: 60px;
+}
+.br320[data-v-4851711d] {
+  background-color: #00d5ff !important;
+}
+.br288[data-v-4851711d] {
+  background-color: #00bfe6 !important;
+}
+.br256[data-v-4851711d] {
+  background-color: #00aacc !important;
+}
+.br224[data-v-4851711d] {
+  background-color: #008099 !important;
+}
+.br192[data-v-4851711d] {
+  background-color: #006a80 !important;
+}
+.br160[data-v-4851711d] {
+  background-color: #00404d !important;
+}
+.br128[data-v-4851711d] {
+  background-color: #002b33 !important;
 }
 
 .audio_w_covers .audio_row .audio_row__actions {

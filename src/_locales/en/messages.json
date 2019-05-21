@@ -1,0 +1,38 @@
+{
+  "extDescription": {
+    "message": "Saving any audios just got easy! Fast download music from Vk."
+  },
+  "extName": {
+    "message": "VK Music Saver"
+  },
+  "extShortName": {
+    "message": "Vk Saver"
+  },
+  "lang": {
+    "message": "en"
+  },
+  "optionsBitrate": {
+    "message": "Show bitrate"
+  },
+  "showOptions": {
+    "message": "Settings"
+  },
+  "titleDefault": {
+    "message": "VK Music Saver"
+  },
+  "titleShowBitrate": {
+    "message": "Do not show bitrate and size"
+  },
+  "titleHideBitrate": {
+    "message": "Show bitrate and size when hovering to audio "
+  },
+  "titleSaveFolderDesc": {
+    "message": "All paths to folders are relative folders for downloads. Leave the field blank, if you do not want the files to be downloaded to subfolders"
+  },
+  "titleSaveFolder": {
+    "message": "Folder for music downloads"
+  },
+  "textSave": {
+    "message": "Save"
+  }
+}

@@ -1,8 +1,3 @@
-/*
-import store from './store';
-global.browser = require('webextension-polyfill');
-*/
-
 chrome.runtime.onMessage.removeListener(handleMessage);
 chrome.runtime.onMessage.addListener(handleMessage);
 
@@ -11,11 +6,12 @@ let goodDownloads = 0;
 let badDownloads = 0;
 let processDownloads = 0;
 const defaultMp3Dir = 'VK audio';
+import store from './store';
 
 function getCfg() {
   let jsonDataSettings = {
-    bitrate: 'showHover',
-    mp3Dir: defaultMp3Dir,
+    bitrate: store.state.bitrate,
+    mp3Dir: store.state.mp3Dir,
     //"videoDir": defaultVideoDir,
   };
   let posData = localStorage.getItem('settings') || null;

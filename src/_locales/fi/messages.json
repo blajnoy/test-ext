@@ -1,0 +1,23 @@
+{
+  "extDescription": {
+    "message": "Improve your VK.com!"
+  },
+  "extName": {
+    "message": "VK Music Saver"
+  },
+  "extShortName": {
+    "message": "VK Saver"
+  },
+  "lang": {
+    "message": "fi"
+  },
+  "optionsBitrate": {
+    "message": "Show bitrate"
+  },
+  "showOptions": {
+    "message": "Settings"
+  },
+  "titleDefault": {
+    "message": "VK Saver"
+  }
+}

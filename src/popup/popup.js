@@ -10,6 +10,5 @@ Vue.prototype.$browser = global.browser;
 new Vue({
   el: '#app',
   store,
-
   render: h => h(App),
 });

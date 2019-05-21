@@ -1,0 +1,23 @@
+{
+  "extDescription": {
+    "message": "Enregistrer des fichiers audio devient facile! Télécharger de la musique à partir de Vk."
+  },
+  "extName": {
+    "message": "VK Music Saver"
+  },
+  "extShortName": {
+    "message": "VK Saver"
+  },
+  "lang": {
+    "message": "fr"
+  },
+  "optionsBitrate": {
+    "message": "Show bitrate"
+  },
+  "showOptions": {
+    "message": "Settings"
+  },
+  "titleDefault": {
+    "message": "VK Saver"
+  }
+}

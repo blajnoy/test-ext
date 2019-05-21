@@ -1,13 +1,30 @@
 <template>
-  <div class="downloadButton audio_act">
-    <div class="size">{{ audiosToDownload.sizes.hq_bit_str || 'Load...' }}</div>
-    <a @click.stop.prevent="onClick()" @mouseover="onHover()" href="#" class="fngfng"></a>
+  <div class="downloadButton audio_act" v-bind:class="{ shown: shown }">
+    <div v-show="show" class="size">{{ audiosToDownload.sizes.hq_bit_str || 'Load...' }}</div>
+    <a
+      @click.stop.prevent="onClick()"
+      @mouseover="onHover()"
+      @mouseleave="
+        onLeave();
+        shown = true;
+      "
+      href="#"
+      class="fngfng"
+    ></a>
   </div>
 </template>
 
 <script>
+import store from '../../store';
+
 export default {
   name: 'DownloadButton',
+  data() {
+    return {
+      shown: false,
+      showHover: false,
+    };
+  },
   props: {
     audiosToDownload: {
       artist: '',
@@ -31,6 +48,14 @@ export default {
     },
     onHover() {
       this.$emit('show-size');
+    },
+    onLeave() {
+      this.$emit('leave');
+    },
+  },
+  computed: {
+    show() {
+      return store.state.bitrate === 'showHover';
     },
   },
 };
@@ -67,7 +92,7 @@ export default {
     transition: all 0.15s ease-in-out;
   }
 
-  &:hover {
+  &:not(.shown):hover {
     .size {
       opacity: 1;
     }
