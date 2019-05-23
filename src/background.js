@@ -1,3 +1,5 @@
+import store from './store';
+
 chrome.runtime.onMessage.removeListener(handleMessage);
 chrome.runtime.onMessage.addListener(handleMessage);
 
@@ -5,8 +7,6 @@ const downloads = {};
 let goodDownloads = 0;
 let badDownloads = 0;
 let processDownloads = 0;
-const defaultMp3Dir = 'VK audio';
-import store from './store';
 
 function getCfg() {
   let jsonDataSettings = {
@@ -39,12 +39,6 @@ function strictReplace(fileName) {
   return fileName.replace(/[^0-9A-zА-я ()\[\]\-./]+/g, '');
 }
 
-function log(name, vkId, trackData, reason) {
-  const json = { name, vkId, trackData, failed_reason: reason };
-  console.log({ json });
-  //$.ajax({ url: 'https://api.vkdownloader.net/error/new/', data: json, type: 'POST' });
-}
-
 async function parseMp3(responce, name, duration, body, vkId) {
   const hasAudioInfo = responce.split('<!json>')[1];
   const filename = name + '.mp3';
@@ -53,7 +47,6 @@ async function parseMp3(responce, name, duration, body, vkId) {
     const json = hasAudioInfo.split('<!>')[0];
     const data = JSON.parse(json);
     if (json.indexOf('subscription') > -1) {
-      log(name, vkId, body, 'require_subscription');
       chrome.tabs.getSelected(null, tab => {
         chrome.tabs.sendMessage(tab.id, failed);
       });
@@ -80,7 +73,6 @@ async function parseMp3(responce, name, duration, body, vkId) {
       });
     }
   } else {
-    log(name, vkId, body, 'region_locked');
     chrome.tabs.getSelected(null, tab => {
       chrome.tabs.sendMessage(tab.id, failed);
     });
@@ -108,16 +100,6 @@ async function getSize(link, callback) {
     };
     xmlhttp.send(null);
   }
-}
-
-function getSavePath(name) {
-  var onlyFileName = name.trim() + '.mp3';
-
-  if (!onlyFileName) {
-    onlyFileName = 'Unnamed.mp3';
-  }
-
-  return onlyFileName;
 }
 
 function generateSlug(name) {
@@ -169,6 +151,7 @@ async function handleMessage(request, sender, sendResponse) {
       });
       break;
     case 'sendRequest':
+      debugger;
       const res = await make(request.link, request.body);
       if (res.statusCode === 200) {
         await parseMp3(res.body, request.name, request.duration, request.body, request.vkId);

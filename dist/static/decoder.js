@@ -1,4 +1,4 @@
-var decoder = {
+const decoder = {
   r: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMN0PQRSTUVWXYZO123456789+/=',
   vkId: 0,
   getRealLink: function(t) {

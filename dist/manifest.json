@@ -1,7 +1,7 @@
 {
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "manifest_version": 2,
   "default_locale": "en",
   "icons": {
@@ -15,7 +15,7 @@
     "default_title": "__MSG_titleDefault__"
   },
   "background": {
-    "scripts": ["static/decoder.js", "static/CRequest.js", "static/url_slug.js", "background.js"]
+    "scripts": ["static/decoder.js", "static/CRequest.js", "background.js"]
   },
   "content_scripts": [
     {

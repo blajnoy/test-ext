@@ -26,9 +26,11 @@
     <template slot="external"
       ><div>external</div></template
     >
-    <template slot="notAvailable"
-      ><div>notAvailable</div></template
-    >
+    <template slot="notAvailable">
+      <div class="audio_restriction_box__icon audio_restriction_box__icon_pensive_face"></div>
+      <div class="audio_restriction_box__title">{{ modalSlotsContent.notAvailable.title }}</div>
+      <div class="audio_restriction_box__content">{{ modalSlotsContent.notAvailable.desc }}</div>
+    </template>
   </Modal>
 </template>
 
@@ -54,6 +56,12 @@ export default {
   },
   data() {
     return {
+      modalSlotsContent: {
+        notAvailable: {
+          title: chrome.i18n.getMessage('textNotAvailableTitle'),
+          desc: chrome.i18n.getMessage('textNotAvailableContent'),
+        },
+      },
       trueHostname: false,
       access: 'https://',
       restrictedSymbols: /[|&\/\\+":*?<>]/g,

@@ -34,5 +34,14 @@
   },
   "textSave": {
     "message": "Save"
+  },
+  "textClose": {
+    "message": "Close"
+  },
+  "textNotAvailableTitle": {
+    "message": "Audio recording unavailable"
+  },
+  "textNotAvailableContent": {
+    "message": "So decided the musician or his representative."
   }
 }

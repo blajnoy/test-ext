@@ -52,52 +52,95 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   z-index: 99999;
 }
-.wrap .lapper[data-v-aa027490] {
-  width: 100%;
-  position: fixed;
-  z-index: 9;
-}
-.wrap .lapper .modal[data-v-aa027490] {
-  width: 600px;
-  margin: 150px auto;
-  background: #fff;
-  padding: 10px;
-  border: 1px solid #ada5a5;
-  border-radius: 3px;
-  position: relative;
-}
-.wrap .lapper .modal .close[data-v-aa027490] {
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin: 10px;
-}
-#start-download-savefrom[data-v-aa027490] {
-  width: 100px;
-  background-color: #5181b8;
-  padding: 7px 16px 8px;
-  cursor: pointer;
-  border: none;
-  color: white;
-  font-size: 13px;
-  text-decoration: none;
-  display: block;
-  border-radius: 13px;
-  margin-top: 6px;
-  text-align: center;
-}
-#wrap-layout[data-v-aa027490] {
+.wrap .wrap-layout[data-v-aa027490] {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.7);
   background-blend-mode: lighten;
+}
+.box_layout[data-v-aa027490] {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box_layout .box_body[data-v-aa027490] {
+  background: #fff;
+  color: #000;
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+  line-height: 1.154;
+  font-weight: 400;
+  width: 450px;
+  padding: 64px 25px 32px;
+  border-radius: 8px;
+  position: relative;
+}
+.audio_restriction_box__close[data-v-aa027490] {
+  background: url(/images/pics/cross.png) no-repeat 50%;
+  width: 14px;
+  height: 14px;
+  margin: 20px;
+  padding: 12px;
+  display: block;
+  border: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  text-indent: 9999px;
+  opacity: 0.75;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+.audio_restriction_box__icon[data-v-aa027490] {
+  width: 72px;
+  height: 72px;
+  display: block;
+  margin: 0 auto 16px;
+}
+.audio_restriction_box__icon_pensive_face[data-v-aa027490] {
+  background: url(/images/audio/pensive_face.png) no-repeat 50%;
+}
+.audio_restriction_box__title[data-v-aa027490] {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.38;
+  text-align: center;
+  color: #000;
+  margin: 0 18px 8px;
+}
+.audio_restriction_box__content[data-v-aa027490] {
+  font-size: 13px;
+  line-height: 1.38;
+  text-align: center;
+  color: #656565;
+  margin: 8px 18px 0;
+}
+.audio_restriction_box__controls[data-v-aa027490] {
+  margin: 34px 18px 0;
+  display: flex;
+  justify-content: center;
+}
+.audio_restriction_box__controls .flat_button[data-v-aa027490] {
+  flex: 1 0 0;
+}
+.audio_restriction_box__controls .flat_button[data-v-aa027490]:only-child {
+  flex-grow: 0;
+  margin: 0;
 }
 
 .vkd_bitrate[data-v-4851711d] {

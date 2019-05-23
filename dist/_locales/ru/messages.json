@@ -34,5 +34,14 @@
   },
   "textSave": {
     "message": "Сохранить"
+  },
+  "textClose": {
+    "message": "Закрыть"
+  },
+  "textNotAvailableTitle": {
+    "message": "Аудиозапись недоступна"
+  },
+  "textNotAvailableContent": {
+    "message": "Так решил музыкант или его представитель."
   }
 }

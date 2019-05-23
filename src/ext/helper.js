@@ -199,8 +199,9 @@ const replaceRestrictedSymbols = str => {
 };*/
 
 const parseMp3 = response => {
-  var json = response.split('<!json>')[1].split('<!>')[0];
-  var data = JSON.parse(json);
+  const json = response.split('<!json>')[1] && response.split('<!json>')[1].split('<!>')[0];
+  const data = json ? JSON.parse(json) : undefined;
+
   if (data && data[0] && data[0][2]) {
     const lnk = data[0][2];
     const script = document.createElement('script');
